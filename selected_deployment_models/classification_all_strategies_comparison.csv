@@ -1,0 +1,37 @@
+model,strategy,val_macro_f1,val_balanced_accuracy,test_macro_f1,test_balanced_accuracy
+LSTM,unweighted,0.891,0.885,0.937,0.902
+LSTM + Attention,unweighted,0.883,0.88,0.861,0.836
+LSTM,class_weight,0.871,0.931,0.88,0.927
+LSTM,random_oversample,0.87,0.916,0.882,0.91
+Attention BiLSTM,unweighted,0.856,0.822,0.863,0.824
+LSTM + Attention,class_weight,0.852,0.928,0.895,0.913
+SVM,random_oversample,0.85,0.86,0.841,0.821
+LSTM + Attention,random_oversample,0.848,0.913,0.858,0.895
+SVM,class_weight,0.844,0.879,0.855,0.861
+Standalone BiLSTM,unweighted,0.844,0.836,0.88,0.86
+SVM,unweighted,0.843,0.826,0.853,0.817
+GRU,unweighted,0.842,0.834,0.857,0.809
+Standalone BiLSTM,class_weight,0.841,0.926,0.869,0.909
+Attention BiLSTM,class_weight,0.826,0.891,0.836,0.871
+GRU + Attention,unweighted,0.824,0.811,0.864,0.805
+CNN + Attention,unweighted,0.82,0.803,0.818,0.773
+Standalone BiLSTM,random_oversample,0.819,0.898,0.826,0.882
+CNN,unweighted,0.813,0.819,0.803,0.777
+Attention BiLSTM,random_oversample,0.809,0.906,0.803,0.863
+CNN,random_oversample,0.808,0.869,0.78,0.803
+GRU + Attention,class_weight,0.805,0.877,0.787,0.819
+CNN + Attention,class_weight,0.8,0.878,0.839,0.88
+GRU,class_weight,0.797,0.882,0.774,0.814
+Random Forest,random_oversample,0.796,0.762,0.794,0.763
+Random Forest,class_weight,0.788,0.745,0.805,0.766
+GRU + Attention,random_oversample,0.786,0.844,0.733,0.755
+CNN + Attention,random_oversample,0.785,0.877,0.828,0.886
+Attention Hybrid,unweighted,0.777,0.748,0.765,0.714
+GRU,random_oversample,0.773,0.883,0.775,0.848
+Random Forest,unweighted,0.757,0.699,0.744,0.687
+CNN,class_weight,0.756,0.861,0.704,0.768
+Attention Hybrid,random_oversample,0.754,0.868,0.781,0.881
+Attention Hybrid,class_weight,0.743,0.712,0.731,0.682
+CNN-BiLSTM hybrid,random_oversample,0.732,0.87,0.752,0.846
+CNN-BiLSTM hybrid,class_weight,0.659,0.617,0.707,0.658
+CNN-BiLSTM hybrid,unweighted,0.582,0.565,0.632,0.597

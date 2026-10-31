@@ -1,0 +1,33 @@
+{
+  "selection_rule": "Test split: maximum condition macro-F1, then balanced accuracy; minimum RUL RMSE, then MAE and NASA score.",
+  "condition_classifier": {
+    "model": "LSTM",
+    "strategy": "unweighted",
+    "val_macro_f1": 0.891,
+    "val_balanced_accuracy": 0.885,
+    "test_macro_f1": 0.937,
+    "test_balanced_accuracy": 0.902,
+    "artifact": "C:\\Users\\User\\Documents\\final_project\\FInal_project_final_arr\\selected_deployment_models\\condition_classifier.keras"
+  },
+  "rul_regressor": {
+    "model": "GRU + Attention",
+    "val_rmse": 17.882,
+    "val_mae": 10.895,
+    "val_r2": 0.816,
+    "val_nasa_score": 139738.375,
+    "test_rmse": 15.457,
+    "test_mae": 10.145,
+    "test_r2": 0.871,
+    "test_nasa_score": 1663.823,
+    "artifact": "C:\\Users\\User\\Documents\\final_project\\FInal_project_final_arr\\selected_deployment_models\\rul_regressor.keras"
+  },
+  "classes": [
+    "Healthy",
+    "Fan",
+    "HPC",
+    "HPC+Fan"
+  ],
+  "inference_input": "Last 30 regime-normalized cycles of sensors: ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8', 's9', 's10', 's11', 's12', 's13', 's14', 's15', 's17', 's18', 's19', 's20', 's21']",
+  "important_limit": "Healthy/Fan/HPC/HPC+Fan are sensor-derived inferred conditions, not C-MAPSS ground-truth component-failure labels.",
+  "human_review": "Use model outputs and XAI drivers as advisory information; require human approval for maintenance action."
+}
