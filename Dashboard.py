@@ -36,7 +36,7 @@ import os
 # tf.keras through the tf_keras compatibility package (legacy Keras 2 engine)
 # so these files load correctly. Requires: pip install tf_keras (matching
 # your installed tensorflow version).
-#os.environ.setdefault("TF_USE_LEGACY_KERAS", "1")
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
 
 import hashlib
 import io
@@ -157,11 +157,9 @@ def panel(title, right_html=""):
 LOCAL_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "local_artifacts_cache")
 _default_artifact_dir = os.environ.get(
     "PDM_ARTIFACT_DIR",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "selected_deployment_models"),
+    "selected_deployment_models",   # relative to the repo root, like the other app's "deployment_model/cnn"
 )
-_default_data_dir = os.environ.get(
-    "PDM_DATA_DIR", os.path.dirname(os.path.abspath(__file__)),
-)
+_default_data_dir = os.environ.get("PDM_DATA_DIR", ".")
 
 
 def _find_dir_containing(filename, root):
