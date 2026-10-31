@@ -183,7 +183,16 @@ if not os.path.exists(os.path.join(_default_data_dir, "test_FD004.txt")):
     if _found:
         _default_data_dir = _found
 
-st.sidebar.caption("Build marker: 2026-08-20-pro (merged CMMS UI + full-fleet raw-data inference)")
+try:
+    import tf_keras as _tfk
+    _tfk_v = _tfk.__version__
+except Exception:
+    _tfk_v = "not installed"
+import sklearn as _sk
+st.sidebar.caption(
+    "Build marker: 2026-08-20-pro (merged CMMS UI + full-fleet raw-data inference)  \n"
+    f"Runtime: TF {tf.__version__} · tf_keras {_tfk_v} · sklearn {_sk.__version__} · numpy {np.__version__}"
+)
 st.sidebar.markdown("### 📦 Load Model Artifacts")
 artifact_source = st.sidebar.radio(
     "Artifacts source", ["Local folder path", "Upload a zip"],
