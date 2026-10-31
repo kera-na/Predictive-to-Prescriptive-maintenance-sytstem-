@@ -271,6 +271,15 @@ def _load_single_model(path_no_ext):
             _original_lambda_init(self, *args, **kwargs)
         tf.keras.layers.Lambda.__init__ = _patched_lambda_init
 
+        # Fix 1b: models saved by a newer Keras write an 'optional' kwarg into
+        # InputLayer's config, which older Keras (e.g. 2.15) rejects with
+        # "Unrecognized keyword arguments: ['optional']". Drop it on load.
+        _original_inputlayer_init = tf.keras.layers.InputLayer.__init__
+        def _patched_inputlayer_init(self, *args, **kwargs):
+            kwargs.pop("optional", None)
+            _original_inputlayer_init(self, *args, **kwargs)
+        tf.keras.layers.InputLayer.__init__ = _patched_inputlayer_init
+
         def _load(path):
             model = tf.keras.models.load_model(path, compile=False, safe_mode=False)
             # Fix 2: custom_objects does NOT reach a raw lambda's globals in
@@ -304,6 +313,7 @@ def _load_single_model(path_no_ext):
             return _load(keras_path)
         finally:
             tf.keras.layers.Lambda.__init__ = _original_lambda_init
+            tf.keras.layers.InputLayer.__init__ = _original_inputlayer_init
     if os.path.exists(joblib_path):
         size = os.path.getsize(joblib_path)
         if size < 1_000:
