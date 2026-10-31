@@ -163,6 +163,28 @@ _default_data_dir = os.environ.get(
     "PDM_DATA_DIR", os.path.dirname(os.path.abspath(__file__)),
 )
 
+
+def _find_dir_containing(filename, root):
+    """Case-insensitive search under `root` for the folder holding `filename`.
+    Linux servers (Streamlit Cloud) are case-sensitive and the repo layout may
+    differ slightly from a Windows machine, so don't rely on an exact path."""
+    target = filename.lower()
+    for dirpath, _dirs, files in os.walk(root):
+        if any(f.lower() == target for f in files):
+            return dirpath
+    return None
+
+
+_app_root = os.path.dirname(os.path.abspath(__file__))
+if not os.path.exists(os.path.join(_default_artifact_dir, "preprocessing_and_label_rules.joblib")):
+    _found = _find_dir_containing("preprocessing_and_label_rules.joblib", _app_root)
+    if _found:
+        _default_artifact_dir = _found
+if not os.path.exists(os.path.join(_default_data_dir, "test_FD004.txt")):
+    _found = _find_dir_containing("test_FD004.txt", _app_root)
+    if _found:
+        _default_data_dir = _found
+
 st.sidebar.caption("Build marker: 2026-08-20-pro (merged CMMS UI + full-fleet raw-data inference)")
 st.sidebar.markdown("### 📦 Load Model Artifacts")
 artifact_source = st.sidebar.radio(
